@@ -10,12 +10,12 @@ import {
 } from 'firebase/auth'
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDid_QezNBnVxhUFgqGO8-klcGVTVW2lNI",
-  authDomain: "crown-clothing-b82c8.firebaseapp.com",
-  projectId: "crown-clothing-b82c8",
-  storageBucket: "crown-clothing-b82c8.appspot.com",
-  messagingSenderId: "549755615951",
-  appId: "1:549755615951:web:0aecadb618982159d2d5ba"
+  apiKey: "AIzaSyBjKUlCDgyck8xsGL9ORWllz8GzTK2fD-8",
+  authDomain: "crown-clothing-a505b.firebaseapp.com",
+  projectId: "crown-clothing-a505b",
+  storageBucket: "crown-clothing-a505b.appspot.com",
+  messagingSenderId: "944929128501",
+  appId: "1:944929128501:web:cff4fe99d61d14f506b17c"
 };
 
 // Initialize Firebase
