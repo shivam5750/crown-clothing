@@ -6,6 +6,8 @@ import {
   getAuth,
   signInWithPopup,
   signInWithRedirect,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   GoogleAuthProvider
 } from 'firebase/auth';
 
@@ -15,7 +17,7 @@ import {
   getDoc,
   setDoc
 } from 'firebase/firestore'
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyBjKUlCDgyck8xsGL9ORWllz8GzTK2fD-8",
   authDomain: "crown-clothing-a505b.firebaseapp.com",
@@ -28,20 +30,23 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
     prompt : 'select_account'
 }
 )
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+export const signInwithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 //DB
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (userAuth, additonalvalue = {}) => {
+  if (!userAuth) return;
+  
   const userDocRef = doc(db, 'users', userAuth.uid);
   console.log(userDocRef);
 
@@ -56,7 +61,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       await setDoc(userDocRef, {
         displayName,
         email,
-        createdat
+        createdat,
+        ...additonalvalue,
       });
     } catch (error) {
       console("Error while adding user to DB", error.message);
@@ -64,4 +70,14 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   }
 
   return userDocRef;
+}
+
+export const  signInUsingEmailAndPasswordAuth = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
+}
+
+export const  signInUsingEmailAndPasswordAuthen = async (email, password) => {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
 }
