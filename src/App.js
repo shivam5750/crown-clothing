@@ -3,6 +3,7 @@ import Home from "./routes/home/home.component";
 import Navigation from './routes/navigation/navigation.component';
 import Authentication from './routes/sigIn/authentication.component';
 
+
 const Shop = () => {
   return (
     <h1>I am the Shop</h1>
