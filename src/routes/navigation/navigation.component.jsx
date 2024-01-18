@@ -1,4 +1,4 @@
-import {Link, Outlet}  from 'react-router-dom';
+import {Link, Outlet, useNavigate}  from 'react-router-dom';
 import { Fragment, useContext } from 'react';
 import {ReactComponent as CrwnLogo} from '../../assests/crown.svg';
 import './navigation.style.scss';
@@ -10,32 +10,37 @@ import { CartContext } from '../../contexts/cart.contexts';
 
 const Navigation = () => {
     const { currentUser } = useContext(UserContext);
-    const { isCartOpen }  = useContext(CartContext);
+    const { isCartOpen } = useContext(CartContext);
+    const navigate = useNavigate();
 
     // const signOuthandler = async () => {
     //     const res = await signOutUser();
     //     // setCurrentUser(null);
     // }
+    const handleSignOut = () => {
+        signOutUser();
+        navigate("\auth");
+    }
     return (
         <Fragment>
             <div className='navigation'>
-                <Link className='logo-container' to= '/'>
+                {currentUser && <Link className='logo-container' to= '/'>
                     <CrwnLogo className='logo' />
-                </Link>
+                </Link>}
                 <div className='nav-links-container'>
-                    <Link className='nav-link' to= '/shop'>
+                    {currentUser && <Link className='nav-link' to= '/shop'>
                         SHOP
-                    </Link>
+                    </Link>}
                     {
                         currentUser ?(
-                            <span className='nav-link' onClick={signOutUser}>SIGN OUT</span>
+                            <span className='nav-link' onClick={handleSignOut}>SIGN OUT</span>
                         ) : (
                             <Link className='nav-link' to= '/auth'>
                         SIGN IN
                     </Link>
                         )
                     }
-                    <CartIcon />
+                    {currentUser && <CartIcon />}
                 </div>
                 {isCartOpen && <CartDropDown />}
                 {/* <CartDropDown /> */}
