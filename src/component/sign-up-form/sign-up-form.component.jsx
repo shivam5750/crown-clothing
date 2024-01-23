@@ -4,7 +4,7 @@ import {
     createUserDocumentFromAuth
 } from '../../utils/firebase/firebase.utils';
 import FormInput from "../../form-input/form-input.component";
-import './sign-up-form.style.scss';
+import { SignUpContainer } from './sign-up-form.style';
 import Button from "../button/button.component";
 // import { UserContext } from "../../contexts/user.contexts";
 
@@ -56,7 +56,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className="sign-up-container">
+        <SignUpContainer>
             <h2>Don't have an account?</h2>
             <span>Sign Up With Email And Password</span>
             <form onSubmit={handleSubmit}>
@@ -92,7 +92,7 @@ const SignUp = () => {
 
                 <Button type="submit">Sign Up</Button>
             </form>
-        </div>
+        </SignUpContainer>
     )
 }
 
